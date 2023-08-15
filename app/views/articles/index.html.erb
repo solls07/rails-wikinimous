@@ -1,0 +1,23 @@
+<nav class="navbar navbar-light bg-light justify-content-between">
+  <a class="navbar-brand">Wikinimous</a>
+  <form class="form-inline">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><%= link_to "New Article" , new_article_path %></button>
+  </form>
+</nav>
+<div class="container">
+  <div class="row">
+    <ul class="col-sm-8 col-sm-offset-2">
+          <% @articles.each do |article| %>
+           <li>
+            <%= link_to article_path(article.id) do %>
+            <%= article.title  %>
+            <%= link_to '<i class="fa-solid fa-pen-to-square"></i>'.html_safe, edit_article_path(article)%>
+            <%= link_to '<i class="fa-solid fa-trash-can"></i>'.html_safe, article_path(article),
+            data: {turbo_method: :delete, turbo_confirm: "Delete #{article.title}?"}%>
+            <% end %>
+            <p><%= article.content  %></p>
+          <% end %>
+        </li>
+    </div>
+  </div>
+</div>
